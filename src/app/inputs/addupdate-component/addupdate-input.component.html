@@ -1,0 +1,247 @@
+<div class="input-wrapper">
+    <div *ngIf="isLoading" class="overlayloader">
+        <div class="loader"></div>
+    </div>
+    <!-- loading section -->
+    <div class="aligncenter_loader" *ngIf="isPageLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>        
+    </div>
+    <!-- loading section ends  -->
+    <div class="card" *ngIf="!isPageLoading">
+        <div class="card-header">
+            <strong>{{action}} Input</strong>
+        </div>
+        <form role="form" (ngSubmit)="save()" #addInputsForm="ngForm">
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-name">Name</label>
+                            <input autofocus="" type="text" id="name" name="name" class="form-control" #name="ngModel" [(ngModel)]="input.name" pattern="[a-zA-Z][a-zA-Z0-9!@#$%^&*()\s]*" required>
+                            <div class="error-block">
+                                <small *ngIf="name.errors?.required && name.touched" class="text-danger">
+                                    Name is required.
+                                </small>
+                                <small *ngIf="name.errors?.pattern && name.touched" class="text-danger">
+                                    Invalid input.
+                                </small>                                                          
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="seller">Channel Partner</label>
+                            <select id="seller" name="seller" class="form-control" size="1" #seller="ngModel" [(ngModel)]="input.sellerID" required>
+                                <option value="">Please select</option>
+                                <option *ngFor="let obj of sellers" value="{{obj.id}}">
+                                    {{obj.username}}
+                                </option>
+                            </select>
+                            <div class="error-block">
+                                <small *ngIf="seller.errors?.required && seller.touched" class="text-danger">
+                                    Channel Partner is required.
+                                </small>              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required relative">
+                            <label for="nf-category">Category</label>
+                            <select id="category1" name="category1" class="form-control wdthset" size="1" (change)="setVarieties( cat )" #category1="ngModel" [(ngModel)]="input.categoryID" required>
+                                <option value="">Please select</option>
+                                <option *ngFor="let cat of categories" value="{{cat.id}}">{{cat.name}}</option>
+                            </select>
+                            <i (click)="showCategoryPrompt()" title="Add Category" class="fa fa-plus addimage"></i>
+                             <div class="error-block">
+                                <small *ngIf="category1.errors?.required && category1.touched" class="text-danger">
+                                    Category is required.
+                                </small>                                                          
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-variety">Variety</label>
+                            <select id="variety" name="variety" class="form-control" [(ngModel)]="input.variety" size="1">
+                                <option value="">Please select</option>
+                                <option *ngFor="let variety of varieties" [value]="variety">
+                                    {{variety}}
+                                </option>                                  
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group relative">
+                            <label for="nf-password">Company/Manufacturer</label>
+                            <select id="Manufacturer" name="Manufacturer" class="form-control wdthset" size="1" [(ngModel)]="input.manufacturerID">
+                                <option value="">Please select</option>
+                                <option *ngFor="let mf of manufacturers" [ngValue]="mf.id">
+                                    {{mf.name}}
+                                </option>
+                            </select>
+                            <i (click)="showPrompt()" title="Add Manufacturer" class="fa fa-plus addimage"></i>
+                            <!-- <div class="error-block">
+                                <small *ngIf="Manufacturer.errors?.required && Manufacturer.touched" class="text-danger">
+                                    Company/Manufacturer is required.
+                                </small>  
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                         <label for="nf-price">Price</label>
+                          <div class="flex">
+                          <div class="icnposition"><i class="fa fa-rupee"></i></div>
+                              <input type="number" id="price" name="price" class="form-control pleft25" aria-label="Text input with dropdown button" #price="ngModel" [(ngModel)]="input.price" min="1" max="9999999999999998" placeholder="" required>
+                               <div class="input-group-btn">
+                                  <select id="select4" name="select4" class="btn btn-secondary dropdown-toggle" [(ngModel)]="input.priceUnit" required>
+                                    <option value="grams">grams</option>
+                                    <option value="Kgs">Kgs</option>
+                                    <option value="Quintal">Quintal</option>
+                                    <option value="Tonne">Tonne</option>
+                                    <option value="Count">Count</option>
+                                    <option value="Dozen">Dozen</option>
+                                 </select>
+                              </div>
+                            </div>
+                            <div class="error-block">
+                                <small *ngIf="price.errors?.required && price.touched" class="text-danger">
+                                    Price is required.
+                                </small>
+                                <small *ngIf="price.errors?.min && price.touched" class="text-danger">
+                                    Minimum price should be 1.
+                                </small>                                                          
+                                <small *ngIf="price.errors?.max && price.touched" class="text-danger">
+                                    Maximum price is allow upto 16 digit.
+                                </small> 
+                            </div>                       
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-quantity">Quantity</label>
+                            <input type="number" id="quantity" name="quantity" class="form-control" [(ngModel)]="input.quantity">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" name="address" #address="ngModel"  class="form-control" [(ngModel)]="input.address" placeholder="" required />
+                            <div class="error-block">
+                                <small *ngIf="address.errors?.required && address.touched" class="text-danger">
+                                    Address is required.
+                                </small>                                                          
+                            </div> 
+                        </div>                                    
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-city">City/Village</label>
+                            <input type="text" id="nf-city" name="city" #city="ngModel" class="form-control" [(ngModel)]="input.city" placeholder="" required>
+                            <div class="error-block">
+                                <small *ngIf="city.errors?.required && city.touched" class="text-danger">
+                                    City is required.
+                                </small>                                                          
+                            </div> 
+                        </div>
+                    </div> 
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="state">State</label>
+                            <select id="state" name="state" (change)="setDistrict();input.district=''"  [(ngModel)]="input.state" placeholder="" required class="form-control" size="1" #state="ngModel" required>
+                                <option value="">Please select</option>
+                                <option *ngFor="let state of states" [value]="state.stateName">
+                                    {{state.stateName}}
+                                </option>                                       
+                            </select>
+                            <div class="error-block">
+                                <small *ngIf="state.errors?.required && state.touched" class="text-danger">
+                                    State is required.
+                                </small>                                                        
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="district">District</label>
+                            <select id="district" name="district" [disabled]="!input.state" [(ngModel)]="input.district" placeholder="" required class="form-control disable" size="1" #district="ngModel" required>
+                                <option value="">Please select</option>
+                                <option *ngFor="let district of districts" [value]="district.districtName">
+                                    {{district.districtName}}
+                                </option>                                       
+                            </select>
+                            <div class="error-block">
+                                <small *ngIf="district.errors?.required && district.touched" class="text-danger">
+                                    District is required.
+                                </small>                                                        
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-pincode">Pin Code </label>
+                            <input type="number" id="nf-pincode" name="pincode" #pincode="ngModel" class="form-control" [(ngModel)]="input.pincode" min="1" max="999999" placeholder="" required>
+                            <div class="error-block">
+                                <small *ngIf="pincode.errors?.required && pincode.touched" class="text-danger">
+                                    Pin Code is required.
+                                </small>                                
+                                <small *ngIf="pincode.errors?.min && pincode.touched" class="text-danger">
+                                    Minimum value should be 1.
+                                </small>                                
+                                <small *ngIf="pincode.errors?.max && pincode.touched" class="text-danger">
+                                    Maximum 6 digit allow.
+                                </small>                                                          
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-additionalInformation">Additional information</label>
+                            <textarea type="text" id="nf-additionalInformation" name="nf-additionalInformation" class="form-control" [(ngModel)]="input.additionalInformation" rows="4"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-terms">Terms & Conditions</label>
+                            <textarea type="text" id="terms" name="terms" class="form-control" [(ngModel)]="input.terms" rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-image" title="You can upload maximum 5 images">Image</label>
+                            <input [disabled]="!input.images || input.images.length==5" #myInput type="file" name="file-7[]" id="file-7" class="inputfile inputfile-6" data-multiple-caption="{count} files selected" imageUpload
+                (imageSelected)="uploadImage($event)"
+                 accept="image/jpg, image/jpeg, image/png"/>
+                            <label for="file-7"><span></span> <strong><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> Upload image</strong></label>
+                            <!-- <i class="fa fa-plus addimage"></i> -->
+                        </div>
+                        <div class="thumbnail pointer-custom" *ngFor="let image of input.images" (click)="viewImage(_host+'/images/inputs/'+image)">
+                            <img src="{{_host}}/images/inputs/{{image}}">
+                            <i class="close fa fa-times" (click)="removeImage(image)"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="reset" class="btn btn-secondary whiteclr" [routerLink]="['/inputs/list']"> Cancel</button>
+                <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!addInputsForm.valid">{{inputId ? 'Update' : 'Save'}}</button>
+            </div>
+        </form>
+    </div>
+    <!-- .card -->
+</div>
+<!-- .inputs-wrapper -->

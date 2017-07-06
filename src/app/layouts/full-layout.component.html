@@ -1,0 +1,442 @@
+<header class="app-header navbar">
+  <button class="navbar-toggler mobile-sidebar-toggler hidden-lg-up" type="button">&#9776;</button>
+  <a class="navbar-brand hidden-md-down" href="#"></a>
+ 
+  <ul class="nav navbar-nav hidden-md-down width">
+    <li class="nav-item">
+      <a class="nav-link navbar-toggler sidebar-toggler" href="#">&#9776;</a>
+    </li>
+	  <li class="search">
+	  	
+	  	<form action="#" method="get" class="topsearch-form pull-left">
+        <div class="flex">
+          <input name="q" class="form-control" placeholder="Search here" type="text">
+          <span class="input-group-btn">
+          <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i> </button>
+          </span> </div>
+      </form>
+      
+	  </li>
+  </ul>
+  <ul class="nav navbar-nav ml-auto">
+   
+	 <li class="nav-item dropdown" dropdown (onToggle)="toggled($event)">
+      <a style="cursor: not-allowed;" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle>
+          All Market
+        </a>
+       <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="JavaScript:Void(0);">Action</a>
+          <a class="dropdown-item" href="JavaScript:Void(0);">Another action</a>
+          <a class="dropdown-item" href="JavaScript:Void(0);">Something else here</a>
+        </div> -->
+      </li>
+   
+   
+   
+   
+    <li class="nav-item">
+      <a class="nav-link" style="cursor: not-allowed;" href="JavaScript:Void(0);" title="Notifications"><i class="fa fa-bell"></i>
+      <span class="badge badge-pill badge-danger"><!-- 5 --></span></a>
+    </li>
+   
+    <li class="nav-item">
+      <a class="nav-link" style="cursor: not-allowed;" href="JavaScript:Void(0);" title="Messages"><i class="fa fa-envelope"></i>
+		  <span class="badge badge-pill badge-danger"><!-- 11 --></span>
+       </a>
+    </li>
+    <li class="nav-item dropdown removedropdwn" dropdown (onToggle)="toggled($event)">
+      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle>
+          <img src="assets/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+		  <i class="fa fa-ellipsis-v"></i> 
+      </a>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="JavaScript:Void(0);" style="cursor: not-allowed;"><i class="fa fa-user"></i> Profile</a>
+        <a class="dropdown-item" href="JavaScript:Void(0);" style="cursor: not-allowed;"><i class="fa fa-wrench"></i> Setting</a>
+        <div class="divider"></div>
+        <a class="dropdown-item" (click)="logout()" href="#"><i class="fa fa-lock"></i> Logout</a>
+      </div>
+    </li>
+  </ul>
+</header>
+
+<div class="app-body">
+  <div class="sidebar">
+    <nav class="sidebar-nav">
+      <ul class="nav panel-body">
+        <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" title="Dashboard"><i class="icon-dashboard"></i><span> Dashboard</span></a> </li>
+        <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" href="javascript:void(0)" title="Logistic Partners"> <i class="icon-logistic-partner"></i> <span>Logistic Partners</span> </a> </li>
+        <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" href="javascript:void(0)" title="Channel Partners"> <i class="icon-channel-partner"></i> <span>Channel Partners</span> </a> </li>
+        <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" href="javascript:void(0)" title="Orders"> <i class="icon-order"></i> <span>Orders</span> </a> </li>
+        <li class="nav-item" [ngClass]="{'not-allowed-custom':!access.category}"> <a (click)="layout('category')" [ngClass]="{'active': active == 'category'}" class="nav-link" title="Category"> <i class="fa fa-list-alt"></i> <span>Category</span></a> </li>
+        <li class="nav-item" [ngClass]="{'not-allowed-custom':!access.manufacturer}"> <a (click)="layout('manufacturer')" [ngClass]="{'active': active == 'manufacturer'}" class="nav-link" title="Manufacturer"> <i class="fa fa-building"></i> <span>Manufacturer</span></a> </li>
+        
+        <li class="nav-item" [ngClass]="{'not-allowed-custom':!access.adminRoles}"> <a (click)="layout('roles')" [ngClass]="{'active': active == 'roles'}" class="nav-link" title="Roles"> <i class="fa fa-list-ul"></i> <span>Roles</span> </a> </li>
+        
+        <li class="nav-item" [ngClass]="{'not-allowed-custom':!access.adminUsers}"> <a (click)="layout('admin-users')" [ngClass]="{'active': active == 'admin-users'}" class="nav-link" title="Admin Users"> <i class="icon-user"></i> <span>Admin Users</span> </a> </li>
+        <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" href="javascript:void(0)" title="Settings"> <i class="icon-settings"></i> <span>Settings</span> </a> </li>
+        <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" href="javascript:void(0)" title="SMS"> <i class="icon-sms"></i> <span>SMS</span> </a> </li>
+        <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" href="javascript:void(0)" title="Email"> <i class="fa fa-envelope-o"></i> <span>Email</span> </a> </li>
+        <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" href="javascript:void(0)" title="Cart"> <i class="icon-cart"></i> <span>Cart</span> </a> </li>
+        <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" href="javascript:void(0)" title="Blog"> <i class="icon-post"></i> <span>Blog</span> </a> </li>
+        <li class="nav-item"> <a class="nav-link" style="cursor: not-allowed;" href="javascript:void(0)" title="Reports"> <i class="icon-Shape-1194"></i> <span>Reports</span></a> </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Main content -->
+  <main class="main">
+
+    <div class="mainarea">
+        <!-- top header -->
+        <div class="top-nav-header">
+            <div class="row">
+                <div class="col-lg-2 col-md-4 col-6"> 
+                    <!-- small box -->
+                    <div class="small-box bg-green" (click)="layout('crops')" [ngClass]="{'active': active == 'crops'}" >
+                        <div class="inner" title="Crops" [ngClass]="{'not-allowed-custom':!access.crops}">
+                          <p>Crops</p>
+                        </div>
+                        <div class="icon">                           
+                            <i class="icon-Shape-13"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- col -->
+                <div class="col-lg-2 col-md-4 col-6"> 
+                    <!-- small box -->
+                    <div class="small-box bg-aqua" (click)="layout('inputs')" [ngClass]="{'active': active == 'inputs'}" >
+                        <div class="inner" title="Inputs" [ngClass]="{'not-allowed-custom':!access.inputs}">
+                            <p>Inputs</p>
+                        </div>
+                        <div class="icon">
+                            <i class="icon-Shape-18"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- col -->
+                <div class="col-lg-2 col-md-4 col-6"> 
+                    <!-- small box -->
+                    <div class="small-box bg-red" (click)="layout('equipments')" [ngClass]="{'active': active == 'equipments'}" >
+                        <div class="inner" title="Equipments" [ngClass]="{'not-allowed-custom':!access.equipments}">
+                            <p>Equipments</p>
+                        </div>
+                        <div class="icon">
+                            <i class="icon-Shape-19"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- col -->
+                <div class="col-lg-2 col-md-4 col-6"> 
+                    <!-- small box -->
+                    <div class="small-box bg-yellow" (click)="layout('land')" [ngClass]="{'active': active == 'land'}" >
+                        <div class="inner" title="Lands" [ngClass]="{'not-allowed-custom':!access.lands}">
+                          <p>Lands</p>
+                        </div>
+                        <div class="icon">
+                            <i class="icon-Shape-21"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- col --> 
+
+                <!-- col -->
+                <div class="col-lg-2 col-md-4 col-6"> 
+                    <!-- small box -->
+                    <div class="small-box bg-purple">
+                        <div class="inner" title="Services" style="cursor:not-allowed;">
+                          <p>Services</p>
+                        </div>
+                        <div class="icon">
+                            <i class="icon-Shape-22"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- col --> 
+
+                <!-- col -->
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="small-box bg-teal" (click)="layout('users');" [ngClass]="{'active': active == 'users'}">
+                        <div class="inner" title="Users" [ngClass]="{'not-allowed-custom':!access.users}">
+                            <p>Users</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-user"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- col --> 
+            </div>
+        </div>
+
+       
+
+        <div class="main-content">
+
+        <div class="content-header">
+           <!-- Breadcrumb -->
+        <ol class="breadcrumb">
+          <breadcrumbs></breadcrumbs>
+        </ol>
+        </div>
+            <router-outlet></router-outlet>
+        </div>
+    </div><!-- /.conainer-fluid -->
+  </main>
+
+  <aside class="aside-menu">
+    <tabset>
+      <tab>
+        <template tabHeading><i class="icon-list"></i></template>
+        <div class="callout m-0 py-h text-muted text-center bg-faded text-uppercase">
+          <small><b>Today</b></small>
+        </div>
+        <hr class="transparent mx-1 my-0">
+        <div class="callout callout-warning m-0 py-1">
+          <div class="avatar float-right">
+            <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+          </div>
+          <div>Meeting with <strong>Lucas</strong></div>
+          <small class="text-muted mr-1"><i class="icon-calendar"></i>&nbsp; 1 - 3pm</small>
+          <small class="text-muted"><i class="icon-location-pin"></i>&nbsp; Palo Alto, CA </small>
+        </div>
+        <hr class="mx-1 my-0">
+        <div class="callout callout-info m-0 py-1">
+          <div class="avatar float-right">
+            <img src="assets/img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+          </div>
+          <div>Skype with <strong>Megan</strong></div>
+          <small class="text-muted mr-1"><i class="icon-calendar"></i>&nbsp; 4 - 5pm</small>
+          <small class="text-muted"><i class="icon-social-skype"></i>&nbsp; On-line </small>
+        </div>
+        <hr class="transparent mx-1 my-0">
+        <div class="callout m-0 py-h text-muted text-center bg-faded text-uppercase">
+          <small><b>Tomorrow</b></small>
+        </div>
+        <hr class="transparent mx-1 my-0">
+        <div class="callout callout-danger m-0 py-1">
+          <div>New UI Project - <strong>deadline</strong></div>
+          <small class="text-muted mr-1"><i class="icon-calendar"></i>&nbsp; 10 - 11pm</small>
+          <small class="text-muted"><i class="icon-home"></i>&nbsp; creativeLabs HQ </small>
+          <div class="avatars-stack mt-h">
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/2.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/3.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/5.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+          </div>
+        </div>
+        <hr class="mx-1 my-0">
+        <div class="callout callout-success m-0 py-1">
+          <div><strong>#10 Startups.Garden</strong> Meetup</div>
+          <small class="text-muted mr-1"><i class="icon-calendar"></i>&nbsp; 1 - 3pm</small>
+          <small class="text-muted"><i class="icon-location-pin"></i>&nbsp; Palo Alto, CA </small>
+        </div>
+        <hr class="mx-1 my-0">
+        <div class="callout callout-primary m-0 py-1">
+          <div><strong>Team meeting</strong></div>
+          <small class="text-muted mr-1"><i class="icon-calendar"></i>&nbsp; 4 - 6pm</small>
+          <small class="text-muted"><i class="icon-home"></i>&nbsp; creativeLabs HQ </small>
+          <div class="avatars-stack mt-h">
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/2.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/3.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/5.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/8.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+          </div>
+        </div>
+        <hr class="mx-1 my-0">
+      </tab>
+      <tab>
+        <template tabHeading><i class="icon-speech"></i></template>
+        <div class="p-1">
+          <div class="message">
+            <div class="py-1 pb-3 mr-1 float-left">
+              <div class="avatar">
+                <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <span class="avatar-status badge-success"></span>
+              </div>
+            </div>
+            <div>
+              <small class="text-muted">Lukasz Holeczek</small>
+              <small class="text-muted float-right mt-q">1:52 PM</small>
+            </div>
+            <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+          </div>
+          <hr>
+          <div class="message">
+            <div class="py-1 pb-3 mr-1 float-left">
+              <div class="avatar">
+                <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <span class="avatar-status badge-success"></span>
+              </div>
+            </div>
+            <div>
+              <small class="text-muted">Lukasz Holeczek</small>
+              <small class="text-muted float-right mt-q">1:52 PM</small>
+            </div>
+            <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+          </div>
+          <hr>
+          <div class="message">
+            <div class="py-1 pb-3 mr-1 float-left">
+              <div class="avatar">
+                <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <span class="avatar-status badge-success"></span>
+              </div>
+            </div>
+            <div>
+              <small class="text-muted">Lukasz Holeczek</small>
+              <small class="text-muted float-right mt-q">1:52 PM</small>
+            </div>
+            <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+          </div>
+          <hr>
+          <div class="message">
+            <div class="py-1 pb-3 mr-1 float-left">
+              <div class="avatar">
+                <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <span class="avatar-status badge-success"></span>
+              </div>
+            </div>
+            <div>
+              <small class="text-muted">Lukasz Holeczek</small>
+              <small class="text-muted float-right mt-q">1:52 PM</small>
+            </div>
+            <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+          </div>
+          <hr>
+          <div class="message">
+            <div class="py-1 pb-3 mr-1 float-left">
+              <div class="avatar">
+                <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <span class="avatar-status badge-success"></span>
+              </div>
+            </div>
+            <div>
+              <small class="text-muted">Lukasz Holeczek</small>
+              <small class="text-muted float-right mt-q">1:52 PM</small>
+            </div>
+            <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+          </div>
+        </div>
+      </tab>
+      <tab>
+        <template tabHeading><i class="icon-settings"></i></template>
+        <div class="p-1">
+          <h6>Settings</h6>
+
+          <div class="aside-options">
+            <div class="clearfix mt-2">
+              <small><b>Option 1</b></small>
+              <label class="switch switch-text switch-pill switch-success switch-sm float-right">
+                <input type="checkbox" class="switch-input" checked>
+                <span class="switch-label" data-on="On" data-off="Off"></span>
+                <span class="switch-handle"></span>
+              </label>
+            </div>
+            <div>
+              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
+            </div>
+          </div>
+
+          <div class="aside-options">
+            <div class="clearfix mt-1">
+              <small><b>Option 2</b></small>
+              <label class="switch switch-text switch-pill switch-success switch-sm float-right">
+                <input type="checkbox" class="switch-input">
+                <span class="switch-label" data-on="On" data-off="Off"></span>
+                <span class="switch-handle"></span>
+              </label>
+            </div>
+            <div>
+              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
+            </div>
+          </div>
+
+          <div class="aside-options">
+            <div class="clearfix mt-1">
+              <small><b>Option 3</b></small>
+              <label class="switch switch-text switch-pill switch-success switch-sm float-right">
+                <input type="checkbox" class="switch-input">
+                <span class="switch-label" data-on="On" data-off="Off"></span>
+                <span class="switch-handle"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="aside-options">
+            <div class="clearfix mt-1">
+              <small><b>Option 4</b></small>
+              <label class="switch switch-text switch-pill switch-success switch-sm float-right">
+                <input type="checkbox" class="switch-input" checked>
+                <span class="switch-label" data-on="On" data-off="Off"></span>
+                <span class="switch-handle"></span>
+              </label>
+            </div>
+          </div>
+
+          <hr>
+          <h6>System Utilization</h6>
+
+          <div class="text-uppercase mb-q mt-2"><small><b>CPU Usage</b></small></div>
+          <div class="progress progress-xs">
+            <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <small class="text-muted">348 Processes. 1/4 Cores.</small>
+
+          <div class="text-uppercase mb-q mt-h"><small><b>Memory Usage</b></small></div>
+          <div class="progress progress-xs">
+            <div class="progress-bar bg-warning" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <small class="text-muted">11444GB/16384MB</small>
+
+          <div class="text-uppercase mb-q mt-h"><small><b>SSD 1 Usage</b></small></div>
+          <div class="progress progress-xs">
+            <div class="progress-bar bg-danger" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <small class="text-muted">243GB/256GB</small>
+
+          <div class="text-uppercase mb-q mt-h"><small><b>SSD 2 Usage</b></small></div>
+          <div class="progress progress-xs">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <small class="text-muted">25GB/256GB</small>
+        </div>
+      </tab>
+    </tabset>
+  </aside>
+</div>
+
+<!-- <footer class="app-footer">
+</footer> -->

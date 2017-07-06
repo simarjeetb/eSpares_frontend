@@ -1,0 +1,173 @@
+<div>
+    <!-- loading section -->
+    <div class="aligncenter_loader" *ngIf="isLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>        
+    </div>
+    <!-- section ends  -->
+    <div class="card"  *ngIf="!isLoading">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-6 col-12">
+                   <strong>View Crop</strong>           
+                </div>
+                <div class="col-sm-6 col-12 text-right linehght">
+                   <button type="button" class="btn btn-secondary" [routerLink]="['/crops/list']">Back</button>  
+
+                    <button *ngIf="addEditDelete" type="button" class="btn btn-success pull-right" (click)="editCrop(crop.id)">Edit Crop</button> 
+                                             &nbsp;
+                </div>
+            </div>
+        </div>
+        <div class="card-block viewmode">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-name">Crop Name</label>
+							<p>{{crop.name}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-password">Seller</label>
+							<p>{{crop.seller ? crop.seller?.first_name ? crop.seller?.first_name + ' ' + crop.seller?.last_name : crop.seller?.username : '-'}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-variety">Category</label>
+							<p>{{crop.category?.name}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-variety">Variety</label>
+                            <p>{{crop.variety ? crop.variety :'-'}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-variety">Address</label>
+                            <p>{{crop.address}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-variety">City</label>
+                            <p>{{crop.city}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-variety">State</label>
+                            <p>{{crop.state}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-variety">District</label>
+                            <p>{{crop.district}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-variety">Pin Code</label>
+                            <p>{{crop.pincode}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-price">Quantity</label>
+                            <p>{{crop.quantity}} {{crop.quantityUnit}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-price">Offer Price</label>
+                            <p><i class="fa fa-rupee"></i> {{crop.price}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-grade">Quality</label>
+                            <p>{{crop.grade ? crop.grade : '-'}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-size">Available From</label>
+							<p>{{crop.availableFrom?.momentObj | date: 'dd/MM/yyyy'}}<span *ngIf="!crop.availableFrom?.momentObj">-</span></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-availibility">Availability Period</label>
+                            <p>{{crop.availablePeriod ? crop.availablePeriod : '-'}} {{crop.availablePeriod ? crop.availableUnit : ''}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-supplyAbility">Supply Ability</label>
+							<p>{{crop.supplyAbility}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="nf-packSize">Supply Area</label>
+                            <p>{{crop.supplyArea ? crop.supplyArea : '-'}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="nf-packSize">Supply Range (km)</label>
+                            <p>{{crop.supplyRange ? crop.supplyRange : '-'}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-qty">Payment Preference</label>
+							<p>{{crop.paymentPreference}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-averageLeadTime">Verified</label>
+                            <p>{{crop.verified}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-averageLeadTime">Description</label>
+                            <p>{{crop.description ? crop.description : '-'}}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-image">Image</label>
+                        </div>
+                        {{!crop.images || !crop.images[0] ? '-' : ''}}
+                        <div class="thumbnail pointer-custom" *ngFor="let image of crop.images" (click)="viewImage(_host+'/images/crops/'+image)">
+                            <img src="{{_host}}/images/crops/{{image}}">
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>   
+</div>

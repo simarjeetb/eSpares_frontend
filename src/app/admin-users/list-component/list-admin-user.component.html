@@ -1,0 +1,137 @@
+<!-- Loader div -->
+<div *ngIf="isLoading" class="overlayloader">
+    <div class="loader"></div>
+</div>
+<!-- <div class="user-wrapper animated fadeIn">       -->
+<div class="user-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- loading section -->
+            <div class="aligncenter_loader" *ngIf="isPageLoading">
+                <div class="is-loading"><i class="page-loader"></i></div>
+            </div>
+            <ngx-flash-messages></ngx-flash-messages>
+            <!-- loading section ends  -->
+            <div class="card" *ngIf="!isPageLoading">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-3 col-12">
+                            <form action="#" class="ng-untouched ng-pristine ng-valid" method="get">
+                                <div class="flex">
+                                    <input class="form-control" name="search" (keyup)="search($event)" [(ngModel)]="searchTerm" placeholder="Search" type="text">
+                                    <span class="input-group-btn">
+                                    <button class="btn btn-flat" id="search-btn" (click)="search($event, 'button')" name="search" type="submit"><i class="fa fa-search"></i> </button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-9 col-12 text-right linehght">
+                            <button type="button" class="btn btn-success btnadd" *ngIf="addEditDelete" [routerLink]="['/admin-users/add']">Add Admin User</button>
+                            <div class="icns">
+                                <a (click)="downloadPDF()" style="cursor:pointer;"><img src="assets/img/pdf.png" alt="pdf"></a>
+                                <a (click)="downloadCSV()" style="cursor:pointer;"><img src="assets/img/xls.png" alt="pdf"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- .row -->
+                </div>
+                <!-- .card-header -->
+                <div class="card-block">
+                    <div class="table-responsive">
+                    <table class="table table-striped" [mfData]="data"
+                        #mf="mfDataTable" 
+                        [mfRowsOnPage]="rowsOnPage"
+                        [(mfSortBy)]="sortBy" 
+                        [(mfSortOrder)]="sortOrder" 
+                        [mfActivePage]="activePage" 
+                        (mfOnPageChange)="onPageChange($event)"
+                        [mfIsServerPagination]="true" 
+                        [(mfAmountOfRows)]="itemsTotal" 
+                        (mfSortOrderChange)="onSortOrder($event)">
+                            <thead>
+                                <tr>
+                                    <th width="15%">
+                                        <mfDefaultSorter by="firstName">User
+                                            <i *ngIf="sortOrder == 'asc'  && sortBy == 'firstName'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                            <i *ngIf="sortOrder == 'desc'  && sortBy == 'firstName'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                        </mfDefaultSorter>
+                                    </th>
+                                    <th width="15%">Role</th>
+                                    <th width="15%">
+                                        <mfDefaultSorter by="email">Email
+                                            <i *ngIf="sortOrder == 'asc'  && sortBy == 'email'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                            <i *ngIf="sortOrder == 'desc'  && sortBy == 'email'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                        </mfDefaultSorter>
+                                    </th>
+                                    <th width="15%">
+                                        <mfDefaultSorter by="mobile">Mobile
+                                            <i *ngIf="sortOrder == 'asc'  && sortBy == 'mobile'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                            <i *ngIf="sortOrder == 'desc'  && sortBy == 'mobile'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                        </mfDefaultSorter>
+                                    </th>
+                                    <th width="15%">
+                                        <mfDefaultSorter by="state">Market
+                                            <i *ngIf="sortOrder == 'asc'  && sortBy == 'state'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                            <i *ngIf="sortOrder == 'desc'  && sortBy == 'state'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                        </mfDefaultSorter>
+                                    </th>
+                                    <!-- <th width="15%">
+                                        <mfDefaultSorter by="createdAt">Registered On
+                                            <i *ngIf="sortOrder == 'asc'  && sortBy == 'createdAt'" class="fa fa-sort-asc" aria-hidden="true"></i>
+                                            <i *ngIf="sortOrder == 'desc'  && sortBy == 'createdAt'" class="fa fa-sort-desc" aria-hidden="true"></i>
+                                        </mfDefaultSorter>
+                                    </th> -->
+                                    <th width="10%">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngIf="itemsTotal == 0">
+                                    <td colspan="6">No record to display.</td>
+                                </tr> 
+                                <tr *ngFor="let user of mf.data">
+                                    <td data-label="Name"><a href="javascript:void(0);" (click)="viewUser(user.id)">{{user.firstName}} {{user.lastName}}</a></td>
+                                    <td data-label="Role">{{user.roleId?.name}}</td>
+                                    <td data-label="Email">{{user.email}}</td>
+                                    <td data-label="Mobile">{{user.mobile}}</td>
+                                    <td data-label="District">{{user.state ? user.state : '-'}}</td>
+                                    <!-- <td data-label="Registered On">{{user.createdAt | date: 'dd/MM/yyyy'}}</td> -->
+                                    <td data-label="Actions">
+                                        <button [disabled]="!addEditDelete" (click)="editUser(user.id)" class="btn btn-success" title="Edit" style="padding:1px 4px"><i class="fa fa-pencil"></i></button>
+                                        <button [disabled]="!addEditDelete" (click)="removeUser(user.id)" class="btn btn-danger orange" title="Delete" style="padding: 1px 4px"><i class="fa fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="6">
+                                        <div class="pagination-section" *ngIf="itemsTotal > 0">
+                                            <div class="row-on-page">
+                                                <label class="label-control">Show</label>
+                                                &nbsp;
+                                                <select class="input-sm" name="itemsOnPage"  [(ngModel)]="itemsOnPage"  (change)="onRowsChange()">
+                                                    <option [ngValue]="5">5</option>
+                                                    <option [ngValue]="10">10</option>
+                                                    <option [ngValue]="25">25</option>
+                                                    <option [ngValue]="50">50</option>
+                                                    <option [ngValue]="100">100</option>
+                                                </select>
+                                                &nbsp;
+                                                <label class="label-control">entries</label>
+                                                    &nbsp; &nbsp;
+                                                <span>Showing {{activePage * rowsOnPage - rowsOnPage + 1}} to {{(activePage * rowsOnPage) < itemsTotal ? (activePage * rowsOnPage):itemsTotal }} of {{itemsTotal}} entries</span>
+                                            </div>
+                                            <div class="text-right">
+                                                <mfBootstrapPaginator></mfBootstrapPaginator>   
+                                            </div>
+                                            <div style="clear: both;"></div>
+                                        </div>  
+                                    </td>    
+                                </tr>                            
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

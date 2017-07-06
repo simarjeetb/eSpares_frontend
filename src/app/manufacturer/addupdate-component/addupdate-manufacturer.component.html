@@ -1,0 +1,77 @@
+<div>
+    <div *ngIf="isLoading" class="overlayloader">
+        <div class="loader"></div>
+    </div>
+    <!-- loading section -->
+    <div class="aligncenter_loader" *ngIf="isPageLoading">
+        <div class="is-loading"><i class="page-loader"></i></div>        
+    </div>
+    <!-- loading section ends  -->
+    <div class="card" *ngIf="!isPageLoading">
+        <div class="card-header">
+            <strong>{{manufacturerID ? 'Edit' : 'Add'}} Manufacturer</strong>
+        </div>
+        <!-- form to add or update Manufacturer -->
+        <form role="form" (ngSubmit)="save()" #addManufactureForm="ngForm">
+        <div class="card-block">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group has-required">
+                            <label for="nf-name">Name</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="" maxlength="50" #name="ngModel" [(ngModel)]="manufacturer.name" pattern="[a-zA-Z][a-zA-Z0-9!@#$%^&*()\s]*" required>
+                            <div class="error-block">
+                                <small *ngIf="name.errors?.required && name.touched" class="text-danger">
+                                    Name is required.
+                                </small>
+                                <small *ngIf="name.errors?.pattern && name.touched" class="text-danger">
+                                    Invalid input.
+                                </small> 
+                                <small *ngIf="name.errors?.maxlength && name.touched" class="text-danger">
+                                    Name shoule be less than 50 character.
+                                </small>                                  
+                            </div>    
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-email">Email</label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="" #email="ngModel" [(ngModel)]="manufacturer.email" email>
+                            <div class="error-block">
+                                <small *ngIf="email.errors?.email && email.touched" class="text-danger">
+                                    Email is not valid.
+                                </small>                                  
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nf-mobile">Mobile</label>
+                            <input type="number" id="mobile" name="mobile" class="form-control" #mobile="ngModel" [(ngModel)]="manufacturer.mobile" placeholder="" min="1000000000" max="9999999999">
+                            <div class="error-block">
+                                <small *ngIf="mobile.errors?.min && mobile.touched" class="text-danger">
+                                    Minimum 10 digit allow.
+                                </small>
+                                <small *ngIf="mobile.errors?.max && mobile.touched" class="text-danger">
+                                    Maximum 10 digit allow.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 ">
+                        <div class="form-group">
+                            <label for="nf-description">Description</label>
+                            <textarea type="text" id="description" name="description" class="form-control" [(ngModel)]="manufacturer.description" placeholder="" rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="card-footer">
+                    <button type="reset" class="btn btn-secondary whiteclr" [routerLink]="['/manufacturer/list']"> Cancel</button>
+                    <button type="submit" class="pull-right btn btn-primary orangeclr" [disabled]="!addManufactureForm.valid">{{manufacturerID ? 'Update' : 'Save'}}</button>
+                </div>
+          </form>
+    </div>
+</div>
