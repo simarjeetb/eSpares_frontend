@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 // Layouts
-import { FullLayoutComponent } from './layouts/full-layout.component';
+import { FullLayoutComponent } from './admin/layouts/full-layout.component';
 
-import { LoginComponent } from './auth/login/login.component';
-import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component'
-import { ActiveRouteGuard } from './auth/services/activate-route-guard';
-import { DeactiveRouteGuard } from './auth/services/deactivate-route-guard';
+import { LoginComponent } from './admin/auth/login/login.component';
+import { ForgotPasswordComponent } from './admin/auth/forgot-password/forgot-password.component'
+import { ActiveRouteGuard } from './admin/auth/services/activate-route-guard';
+import { DeactiveRouteGuard } from './admin/auth/services/deactivate-route-guard';
 
 export const routes: Routes = [
   {
@@ -16,12 +16,12 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'login',
+    path: 'admin/login',
     component: LoginComponent,
     canActivate: [ActiveRouteGuard]
   },
   {
-    path: 'forgot-password',
+    path: 'admin/forgot-password',
     component: ForgotPasswordComponent,
     canActivate: [ActiveRouteGuard]
   },
@@ -34,44 +34,24 @@ export const routes: Routes = [
     canActivate: [DeactiveRouteGuard],
     children: [
       {
-        path: 'dashboard',
-        loadChildren: './dashboard/dashboard.module#DashboardModule'
+        path: 'admin/dashboard',
+        loadChildren: './admin/dashboard/dashboard.module#DashboardModule'
+      },
+       {
+        path: 'admin/users',
+        loadChildren: './admin/users/users.module#UsersModule'      
       },
       {
-        path: 'crops',
-        loadChildren: './crops/crops.module#CropsModule'
+        path: 'admin/roles',
+        loadChildren: './admin/roles/roles.module#RolesModule'      
       },
       {
-        path: 'inputs',
-        loadChildren: './inputs/inputs.module#InputsModule'  
-      },
-      {
-        path: 'equipments',
-        loadChildren: './equipments/equipments.module#EquipmentsModule'
-      },
-      {
-        path: 'land',
-        loadChildren: './land/land.module#LandModule'
-      },
-      {
-        path: 'users',
-        loadChildren: './users/users.module#UsersModule'      
-      },
-      {
-        path: 'roles',
-        loadChildren: './roles/roles.module#RolesModule'      
-      },
-      {
-        path: 'manufacturer',
-        loadChildren: './manufacturer/manufacturer.module#ManufacturerModule'      
-      },
-      {
-        path: 'category',
-        loadChildren: './category/category.module#CategoryModule'      
+        path: 'admin/category',
+        loadChildren: './admin/category/category.module#CategoryModule'      
       },
       {
         path: 'admin-users',
-        loadChildren: './admin-users/admin-users.module#AdminUsersModule'      
+        loadChildren: './admin/admin-users/admin-users.module#AdminUsersModule'      
       }
     ]
   }
