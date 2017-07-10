@@ -67,9 +67,9 @@
  }
  
  .form-group > label {
-     color: #626262;
-     font-size: 18px;
-     font-weight: 300;
+     color: #555555;
+     font-size: 13px;
+     font-weight:400;
  }
  
  header.navbar .navbar-nav li.search {
@@ -571,14 +571,14 @@
  }
  
  .btn-primary {
-     background-color: #3c8dbc;
-     border-color: #367fa9;
+     background-color: #173673;
+     border-color: #173673;
  }
  
  .btn-primary:hover,
  .btn-primary:active,
  .btn-primary.hover {
-     background-color: #367fa9;
+     background-color: #173673;
  }
  
  .btn-info {
@@ -640,11 +640,7 @@
  .description-block>.description-text {
      text-transform: uppercase;
  }
- 
- .mainarea .card-block .form-group .form-control {
-     padding: 0.8rem 0.75rem;
- }
- 
+
  .card-header .input-group input[type="text"] {
      border-right: 0;
      font-family: 'Open Sans', sans-serif !important;
@@ -661,8 +657,9 @@
  .mainarea .card-block .form-group .form-control {
      color: #666666;
      font-family: 'Open Sans', sans-serif !important;
-     font-size: 18px;
+     font-size: 14px;
      font-weight: 300;
+     padding: 10px 15px;
  }
  
  .linehght {
@@ -907,10 +904,11 @@
      background-color: #ff8c15 !important;
  }
  
- .sidebar-nav {
+.sidebar .sidebar-nav {
      -webkit-transition: width .1s ease-in-out;
      -o-transition: width .1s ease-in-out;
      transition: width .1s ease-in-out;
+     padding-top: 0 !important;
  }
  
  header.navbar .nav-item {
@@ -930,7 +928,7 @@
 }
 
 .sidebar-fixed .sidebar .sidebar-nav {
-   overflow-y: scroll;
+   overflow-y:auto;
    overflow-x: hidden;
 }
  
@@ -964,11 +962,19 @@
  .sidebar .nav .nav-item > .nav-link {
      font-size: 17px !important;
      background: #3fa14c;
-     border-bottom: 1px solid #69c675;
-     border-left: 2px solid #50b75e;
+     border-bottom: 1px solid #1c438d;
+     border-left: 2px solid #1c438d;
      cursor: pointer;
  }
+
+
+.sidebar .nav .nav-item .nav-link:hover, .sidebar .nav .nav-item .navbar .dropdown-toggle:hover, .navbar .sidebar .nav .nav-item .dropdown-toggle:hover { 
+    background: #1b438f none repeat scroll 0 0 !important;
+    border-left: 2px solid orange;
+    color: #fff;
+}
  
+
  ul.navbar-nav.width {
      width: 60%
  }
@@ -988,7 +994,7 @@
  }
  
  .navbar-brand {
-     height: 115px !important;
+    
      border: transparent !important;
      /*	-webkit-transition: width .1s ease-in-out;
 	-o-transition: width .1s ease-in-out;
@@ -1136,14 +1142,14 @@
  .mainarea .card-block .form-group input {
      color: #666666 !important;
      font-family: 'Open Sans', sans-serif !important;
-     font-size: 18px !important;
-     font-weight: 300;
+     font-size: 14px !important;
+     font-weight: 200;
  }
  
  .mainarea .card-block .form-group textarea {
      color: #666666 !important;
-     font-size: 18px !important;
-     font-weight: 300 !important;
+     font-size: 14px !important;
+     font-weight: 200 !important;
  }
  
  .pagenumber {
@@ -1287,20 +1293,22 @@
  }
  
  .login-box-body .form-group {
-     margin-bottom: 7px !important;
+     margin-bottom: 20px;
  }
  
  .login-box-body .form-group .form-control {
-     padding: 0.8rem 0.75rem;
-     color: #a3a3a3;
-     font-size: 18px;
+     padding: 10px 15px;
+     color: #333;
+     font-size: 15px;
+     border-color: #afafaf;
+     height: 45px;
  }
  
  .login-box {
      box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-     border-radius: 3px;
-     -moz-border-radius: 3px;
-     -webkit-border-radius: 3px;
+     border-radius: 0px;
+     -moz-border-radius: 0px;
+     -webkit-border-radius: 0px;
      display: -webkit-box;
      display: -ms-flexbox;
      display: flex;
@@ -1319,6 +1327,7 @@
      border-radius: 5px;
      background: #fff;
      color: #fff;
+     box-shadow: 0 7px 0 0 #232f3e;
  }
  
  .login-box-body .form-control-feedback {
@@ -1339,7 +1348,8 @@
  .forgotlink:focus,
  .linktext:hover,
  .linktext:focus {
-     color: #4dbd74 !important;
+     color: #1c438e !important;
+     text-decoration: none;
  }
  
  .login-box-msg {
@@ -1349,7 +1359,7 @@
  }
  
  .login-page {
-     content: "";
+    /* content: "";
      position: fixed;
      top: 0;
      left: 0;
@@ -1359,7 +1369,7 @@
      background-size: cover;
      z-index: -1;
      bottom: 0;
-     right: 0;
+     right: 0;*/
  }
  
  .login-box-body .form-group {
@@ -1645,8 +1655,7 @@
  .content-header .breadcrumb {
      background: transparent none repeat scroll 0 0;
      border-radius: 2px;
-     font-size: 15px;
-     font-style: italic;
+     font-size: 12px;
      margin-bottom: 0;
      margin-top: 0;
      padding: 0;
@@ -1664,6 +1673,7 @@
      color: #444;
      text-decoration: none;
      display: inline-block;
+     font-weight: 200;
  }
  
  .content-header .breadcrumb li.active {
@@ -1689,8 +1699,9 @@
 
   .card-block option{
     font-family: 'Open Sans', sans-serif !important;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 300;
+    
  }
  
  .main-content .card-block table td > a {
@@ -2117,6 +2128,122 @@ thead.custom th{
     border-bottom: 0 !important;
 }
 
+/* Start espares */
+.login-box{
+   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#232f3e+0,1b4490+51,232f3e+99 */
+background: #232f3e; /* Old browsers */
+background: -moz-linear-gradient(-45deg, #232f3e 0%, #1b4490 51%, #232f3e 99%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg, #232f3e 0%,#1b4490 51%,#232f3e 99%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg, #232f3e 0%,#1b4490 51%,#232f3e 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#232f3e', endColorstr='#232f3e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.login-logo { color: #ff9900 !important; font-size: 28px; }
+
+.btn-login { background: #1c4185 none repeat scroll 0 0;
+    border: medium none;
+    border-radius: 3px;
+    color: #fff;
+    float: left;
+    font-size: 18px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 10px 0;
+    width: 100%;
+    cursor: pointer;
+}
+
+.btn-login.disabled, .btn-login:disabled
+{
+    background: #b5b5b5;
+    cursor: not-allowed;
+}
+
+.btn-cancel{
+    background: #808080;
+    color: #fff;
+}
+
+.btn-orange{
+    background: #ff9900;
+    color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+.err {  background: #da1d1d none repeat scroll 0 0;
+    border-radius: 0 0 3px 3px;
+    color: #fff;
+    font-size: 12px;
+    padding: 1px 9px;
+    position: absolute;
+    top: 70px;
+    width: 100%;
+}
+
+.err span.text-danger{ color:#fff !important;}
+
+.form-control:focus {
+    border-color: #66afe9;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+    outline: 0 none;
+}
+
+.sidebar{ background:#1c438d !important;}
+
+.btn-blue { background: #1C438D; color: #fff; }
+
+
+
+
+/* End espares */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  /* media queries responsive */
  
  @media (min-width:1300px) {
@@ -2180,7 +2307,7 @@ thead.custom th{
          height: auto !important;
      }
      header.navbar .navbar-brand {
-         background-color: #ff8c15 !important;
+         background-color: #173673 !important;
          background-size: 70px!important;
      }
      .navbar-custom-menu>.navbar-nav {
@@ -2405,10 +2532,10 @@ thead.custom th{
      .login-box {
          -moz-box-align: center;
          align-items: center;
-         border-radius: 3px;
+         border-radius: 0px;
          box-shadow: none;
          display: flex;
-         width: 100%;
+         width: 100%; 
      }
      .login-box-body {
          background: #fff none repeat scroll 0 0;

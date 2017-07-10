@@ -50,7 +50,7 @@ export const routes: Routes = [
         loadChildren: './admin/category/category.module#CategoryModule'      
       },
       {
-        path: 'admin-users',
+        path: 'admin/admin-users',
         loadChildren: './admin/admin-users/admin-users.module#AdminUsersModule'      
       }
     ]
